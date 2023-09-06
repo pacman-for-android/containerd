@@ -1,0 +1,43 @@
+diff --git a/containerd/defaults/defaults_unix.go b/containerd.modified/defaults/defaults_unix.go
+index c79f9ba..f7e5ef4 100644
+--- a/containerd/defaults/defaults_unix.go
++++ b/containerd.modified/defaults/defaults_unix.go
+@@ -21,19 +21,19 @@ package defaults
+ const (
+ 	// DefaultRootDir is the default location used by containerd to store
+ 	// persistent data
+-	DefaultRootDir = "/var/lib/containerd"
++	DefaultRootDir = "/data/var/lib/containerd"
+ 	// DefaultStateDir is the default location used by containerd to store
+ 	// transient data
+-	DefaultStateDir = "/run/containerd"
++	DefaultStateDir = "/data/var/run/containerd"
+ 	// DefaultAddress is the default unix socket address
+-	DefaultAddress = "/run/containerd/containerd.sock"
++	DefaultAddress = "/data/var/run/containerd/containerd.sock"
+ 	// DefaultDebugAddress is the default unix socket address for pprof data
+-	DefaultDebugAddress = "/run/containerd/debug.sock"
++	DefaultDebugAddress = "/data/var/run/containerd/debug.sock"
+ 	// DefaultFIFODir is the default location used by client-side cio library
+ 	// to store FIFOs.
+-	DefaultFIFODir = "/run/containerd/fifo"
++	DefaultFIFODir = "/data/var/run/containerd/fifo"
+ 	// DefaultRuntime is the default linux runtime
+ 	DefaultRuntime = "io.containerd.runc.v2"
+ 	// DefaultConfigDir is the default location for config files.
+-	DefaultConfigDir = "/etc/containerd"
++	DefaultConfigDir = "/data/etc/containerd"
+ )
+diff --git a/containerd/runtime/v1/linux/bundle.go b/containerd.modified/runtime/v1/linux/bundle.go
+index 5f492ac..5bd4b72 100644
+--- a/containerd/runtime/v1/linux/bundle.go
++++ b/containerd.modified/runtime/v1/linux/bundle.go
+@@ -190,7 +190,7 @@ func (b *bundle) legacyShimAddress(namespace string) string {
+ 	return filepath.Join(string(filepath.Separator), "containerd-shim", namespace, b.id, "shim.sock")
+ }
+ 
+-const socketRoot = "/run/containerd"
++const socketRoot = "/data/var/run/containerd"
+ 
+ func (b *bundle) shimAddress(namespace, socketPath string) string {
+ 	d := sha256.Sum256([]byte(filepath.Join(socketPath, namespace, b.id)))
